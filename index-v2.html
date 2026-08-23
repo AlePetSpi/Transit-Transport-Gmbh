@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSK - Kalo Spiri Kompetenz</title>
+    <!-- Einbindung der Google Fonts für Black Ops One -->
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS-Variablen und Reset */
+        :root {
+            --primary-color: #152A12; /* Hauptfarbe */
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-main {
+            font-family: 'Black Ops One', cursive;
+            font-size: 96px;
+            color: var(--primary-color);
+            line-height: 0.8;
+        }
+
+        .logo-sub {
+            font-size: 12px;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /*.nav-links a {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }*/
+
+        .btn-offerte {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .btn-offerte:hover {
+            opacity: 0.8;
+            color: #fff;
+        }
+
+        /* Slider Section (VORHER / NACHHER) */
+        .slider-section {
+            width: 100%;
+            padding: 0 50px;
+            margin: 40px 0;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            cursor: ew-resize;
+        }
+
+        .slider-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Black Ops One', cursive;
+            font-size: 60px;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Platzhalter Hintergründe (Hier die echten Bilder einfügen) */
+        .img-before {
+            background-color: #dcd0b3; /* Messiger Raum Platzhalter */
+            background-image: url("img/vorher.png");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .img-after {
+            background-color: #e8efe8; /* Sauberer Raum Platzhalter */
+            background-image: url("img/nachher.png");
+            background-size: cover;
+            background-position: center;
+            width: 50%; /* Startposition */
+            border-right: 3px solid #fff;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .slider-btn {
+            background: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            color: #000;
+            font-weight: bold;
+            pointer-events: auto;
+        }
+
+        /* Allgemeine Sections */
+        .section {
+            padding: 60px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Wer sind wir / Intro */
+        .intro-text {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .image-placeholder-large {
+            width: 100%;
+            height: 350px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Dienstleistungen */
+        .dienstleistungen {
+            background-color: var(--bg-color);
+        }
+        
+        .dienst-img-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .dienst-img-grid img, .dienst-img-grid .image-placeholder {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            background-color: #ccc;
+        }
+
+        /* Referenzen */
+        .ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .ref-card {
+            background-color: #dcdcdc;
+            padding: 20px;
+            height: 250px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            font-weight: 500;
+            color: #000;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 60px 50px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-logo {
+            font-family: 'Black Ops One', cursive;
+            font-size: 96px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Responsivität */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+                gap: 20px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .slider-section {
+                padding: 0 20px;
+            }
+            .slider-container {
+                height: 300px;
+            }
+            .grid-2col {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation wie in Bild 8 -->
+    <header>
+        <div class="logo-container">
+            <span class="logo-main">KSK</span>
+            <span class="logo-sub">Kalo Spiri Kompetenz</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#dienstleistungen">Dienstleistungen</a>
+            <a href="#referenzen">Referenzen</a>
+            <a href="#uber-uns">Über uns</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="#offerte" class="btn-offerte">Kostenlose Offerte</a>
+        </nav>
+    </header>
+
+    <!-- 1. SLIDER AM ANFANG (Vorher / Nachher) -->
+    <section class="slider-section">
+        <div class="slider-container" id="sliderContainer">
+            <div class="slider-img img-before">
+            </div>
+            <div class="slider-img img-after" id="sliderAfter">
+            </div>
+            <div class="slider-handle" id="sliderHandle">
+                <div class="slider-btn">
+                    <span>&lt;</span>
+                    <span>&gt;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. ÜBER UNS / WER SIND WIR -->
+    <section id="uber-uns" class="section">
+        <h2>Wer sind wir?</h2>
+        <div class="grid-2col">
+            <div>
+                <h3>Wir sind die Brüder Spiridonow...</h3>
+                <p class="intro-text">
+                    Wir bieten eine professionelle Entsorgung Ihrer Wohnungen und Häuser. Schnell, sauber und zuverlässig. Wir wissen genau, wie man Ordnung schafft und Platz für Neues macht.
+                </p>
+            </div>
+            <div class="image-placeholder-large">
+                [Hier Teamfoto einfügen]
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. DIENSTLEISTUNGEN -->
+    <section id="dienstleistungen" class="section dienstleistungen">
+        <h2>Dienstleistungen</h2>
+        <p style="margin-bottom: 20px;">Wir bieten eine professionelle Entsorgung Ihrer...</p>
+        <div class="dienst-img-grid">
+            <div class="image-placeholder" style="height: 300px; display:flex; align-items:center; justify-content:center; background:#ddd;">
+                [Bild LKW & Container]
+            </div>
+            <div class="image-placeholder" style="height: 300px; display:flex; align-items:center; justify-content:center; background:#ddd;">
+                [Bild Vorher/Nachher Raum]
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. REFERENZEN -->
+    <section id="referenzen" class="section">
+        <h2>Referenzen</h2>
+        <div class="ref-grid">
+            <div class="ref-card">Sehr professionelle Arbeit</div>
+            <div class="ref-card">Sehr professionelle Arbeit</div>
+            <div class="ref-card">Sehr professionelle Arbeit</div>
+            <div class="ref-card">Sehr professionelle Arbeit</div>
+            
+            <div class="ref-card">Sehr professionelle Arbeit</div>
+            <div class="ref-card">Sehr professionelle Arbeit</div>
+            <div class="ref-card">Sehr professionelle Arbeit</div>
+            <div class="ref-card">Sehr professionelle Arbeit</div>
+        </div>
+    </section>
+
+    <!-- 5. KONTAKT -->
+    <section id="kontakt" class="section">
+        <h2>Kontakt aufnehmen</h2>
+        <p style="text-align: center; margin-bottom: 40px;">Bitte teilen Sie uns mit, wie wir Ihnen helfen können. Nach Erhalt Ihrer Nachricht werden wir uns so rasch wie möglich um Ihre Anfrage kümmern.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px; max-width: 900px; margin: 0 auto;">
+            <div style="background: #f4f4f4; padding: 20px; border-radius: 10px;">
+                <h4 style="color: var(--primary-color);">Anrufen</h4>
+                <p><strong>031 868 06 80</strong></p>
+                <p style="font-size: 14px; color: #666;">Mo – Fr<br>7:30 – 12:00 / 13:15 – 16:00 Uhr</p>
+            </div>
+            <div style="background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 10px;">
+                <h4 style="color: var(--primary-color);">Nachricht senden</h4>
+                <form action="#">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <input type="text" placeholder="Name" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        <input type="text" placeholder="Vorname" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <input type="text" placeholder="Firma / Gemeinde" style="width: 100%; padding: 10px; margin-top: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-top: 15px;">
+                        <input type="text" placeholder="Strasse / Hausnummer" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        <input type="text" placeholder="PLZ / Ort" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <input type="tel" placeholder="Telefon" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        <input type="email" placeholder="E-Mail" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <textarea placeholder="Nachricht" rows="4" style="width: 100%; padding: 10px; margin-top: 15px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                    <button type="submit" class="btn-offerte" style="width: 100%; margin-top: 15px; border: none; padding: 15px;">Senden</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Kontaktieren Sie uns</h4>
+                <ul>
+                    <li>Telefon: 031 868 06 80</li>
+                    <li>E-Mail: info@schwendimann.ch</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#dienstleistungen">Dienstleistungen</a></li>
+                    <li><a href="#referenzen">Referenzen</a></li>
+                    <li><a href="#uber-uns">Über uns</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <span class="footer-logo" style="color: #fff;">KSK</span>
+                    <span style="font-size: 12px; letter-spacing: 1px; margin-bottom: 20px; display:block; text-align:right;">Kalo Spiri Kompetenz</span>
+                    <p style="text-align: right; font-size: 14px; line-height: 1.6;">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT FÜR DEN BILDER-SLIDER -->
+    <script>
+        // The how of creating a good slider is to put the two images on top of each other and then use a handle to reveal the second image. This is done by adjusting the width of the second image based on the position of the handle.
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliderContainer = document.getElementById('sliderContainer');
+            const sliderAfter = document.getElementById('sliderAfter');
+            const sliderHandle = document.getElementById('sliderHandle');
+            
+            let isDragging = false;
+
+            // Funktion zur Aktualisierung der Position
+            function updateSlider(clientX) {
+                if (!isDragging) return;
+                
+                const rect = sliderContainer.getBoundingClientRect();
+                let x = clientX - rect.left;
+
+                // Begrenzungen setzen
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+
+                // Prozentsatz berechnen
+                const percent = (x / rect.width) * 100;
+
+                // CSS anwenden
+                sliderAfter.style.width = percent + '%';
+                sliderHandle.style.left = percent + '%';
+            }
+
+            // Maus Events
+            sliderContainer.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                updateSlider(e.clientX);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                updateSlider(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            // Touch Events für mobile Geräte
+            sliderContainer.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                updateSlider(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                updateSlider(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        });
+    </script>
+</body>
+</html>

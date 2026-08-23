@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSK – Kalo Spiri Kompetenz</title>
+    <style>
+        /* ---------- Reset & Basis ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f9f9f9;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ---------- Header ---------- */
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .logo span {
+            color: #e67e22;
+        }
+        .logo small {
+            font-size: 0.8rem;
+            font-weight: 300;
+            display: block;
+            letter-spacing: 2px;
+            color: #ccc;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        nav ul li a {
+            font-weight: 500;
+            padding: 8px 0;
+            border-bottom: 3px solid transparent;
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            border-bottom-color: #e67e22;
+        }
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+                background: #2c3e50;
+            }
+            nav ul.open {
+                display: flex;
+            }
+        }
+
+        /* ---------- Sections ---------- */
+        .section {
+            display: none;
+            padding: 60px 0;
+        }
+        .section.active {
+            display: block;
+        }
+
+        /* Hero (Start) */
+        #start {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+        #start h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        #start h1 span {
+            color: #e67e22;
+        }
+        #start p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-block;
+            background: #e67e22;
+            color: #fff;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.4);
+        }
+        .btn:hover {
+            background: #d35400;
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #fff;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Allgemeine Sektionen */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* Dienstleistungen */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .service-card p {
+            color: #555;
+        }
+
+        /* Referenzen */
+        .ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .ref-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            border-left: 4px solid #e67e22;
+        }
+        .ref-card .quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #444;
+        }
+        .ref-card .author {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Über uns */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .about-text {
+            flex: 2;
+            min-width: 280px;
+        }
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .about-text p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .about-image {
+            flex: 1;
+            min-width: 200px;
+            background: #e67e22;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 4rem;
+        }
+
+        /* Kontakt */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+        .contact-info h3 {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .contact-info p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .contact-info .detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .contact-info .detail i {
+            font-size: 1.3rem;
+            color: #e67e22;
+        }
+        /* Formular */
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.2s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: #e67e22;
+        }
+        .contact-form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .contact-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        @media (max-width: 480px) {
+            .contact-form .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        .contact-form .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.2rem;
+        }
+        .form-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            display: none;
+        }
+        .form-message.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .form-message.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: #ccc;
+            padding: 40px 0 20px;
+        }
+        footer .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        footer h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        footer ul {
+            list-style: none;
+        }
+        footer ul li {
+            margin-bottom: 8px;
+        }
+        footer ul li a {
+            color: #ccc;
+            transition: color 0.2s;
+        }
+        footer ul li a:hover {
+            color: #e67e22;
+        }
+        footer .copyright {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Hilfsklassen */
+        .text-center {
+            text-align: center;
+        }
+        .mt-20 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="container">
+        <div class="logo">
+            KSK <span>Kalo Spiri</span>
+            <small>Kompetenz</small>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen">☰</button>
+        <nav>
+            <ul id="navList">
+                <li><a class="active" data-section="start">Start</a></li>
+                <li><a data-section="dienstleistungen">Dienstleistungen</a></li>
+                <li><a data-section="referenzen">Referenzen</a></li>
+                <li><a data-section="ueber-uns">Über uns</a></li>
+                <li><a data-section="kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== SECTIONS ===== -->
+
+<!-- START / HERO -->
+<section id="start" class="section active">
+    <div class="container">
+        <h1>Willkommen bei <span>KSK</span></h1>
+        <p>Professionelle Entsorgung Ihrer alten Möbel und Gegenstände – bei Umzug, Renovation oder Entrümpelung.</p>
+        <a href="#kontakt" class="btn" id="offerteBtn">Kostenlose Offerte</a>
+        <br><br>
+        <a href="#dienstleistungen" class="btn btn-outline">Mehr erfahren</a>
+    </div>
+</section>
+
+<!-- DIENSTLEISTUNGEN -->
+<section id="dienstleistungen" class="section">
+    <div class="container">
+        <h2 class="section-title">Unsere Dienstleistungen</h2>
+        <p class="section-subtitle">Wir bieten eine professionelle Entsorgung Ihrer …</p>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>🏠 Umzugsentsorgung</h3>
+                <p>Alte Möbel, Kartons und Sperrmüll – wir räumen alles ab, was beim Umzug nicht mehr mit soll.</p>
+            </div>
+            <div class="service-card">
+                <h3>🔨 Renovationsabfall</h3>
+                <p>Nach der Renovation entsteht viel Abfall. Wir kümmern uns um die fachgerechte Entsorgung.</p>
+            </div>
+            <div class="service-card">
+                <h3>🗑️ Entrümpelung</h3>
+                <p>Keller, Dachboden oder ganze Wohnungen – wir entrümpeln schnell und zuverlässig.</p>
+            </div>
+            <div class="service-card">
+                <h3>♻️ Umweltgerecht</h3>
+                <p>Wir trennen und entsorgen nach den neuesten Umweltstandards – nachhaltig und verantwortungsvoll.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REFERENZEN -->
+<section id="referenzen" class="section">
+    <div class="container">
+        <h2 class="section-title">Referenzen</h2>
+        <p class="section-subtitle">Das sagen unsere Kunden</p>
+        <div class="ref-grid">
+            <div class="ref-card">
+                <div class="quote">„Sehr professionelle Arbeit“</div>
+                <div class="author">– M. Müller</div>
+            </div>
+            <div class="ref-card">
+                <div class="quote">„Sehr professionelle Arbeit“</div>
+                <div class="author">– S. Weber</div>
+            </div>
+            <div class="ref-card">
+                <div class="quote">„Sehr professionelle Arbeit“</div>
+                <div class="author">– T. Schmidt</div>
+            </div>
+            <div class="ref-card">
+                <div class="quote">„Sehr professionelle Arbeit“</div>
+                <div class="author">– A. Fischer</div>
+            </div>
+            <div class="ref-card">
+                <div class="quote">„Sehr professionelle Arbeit“</div>
+                <div class="author">– K. Hoffmann</div>
+            </div>
+            <div class="ref-card">
+                <div class="quote">„Sehr professionelle Arbeit“</div>
+                <div class="author">– L. Wagner</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ÜBER UNS -->
+<section id="ueber-uns" class="section">
+    <div class="container">
+        <h2 class="section-title">Wer sind wir?</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Die Brüder Spiridonow</h3>
+                <p>Wir sind ein familiäres Startup, das sich auf die professionelle Entsorgung von Möbeln und Gegenständen spezialisiert hat. Mit Leidenschaft und zuverlässiger Arbeit sorgen wir dafür, dass Ihr Umzug oder Ihre Renovation stressfrei verläuft.</p>
+                <p>Unser Team arbeitet effizient, sauber und umweltbewusst. Wir holen ab, was Sie nicht mehr brauchen, und entsorgen es fachgerecht.</p>
+                <p><strong>KSK – Kalo Spiri Kompetenz</strong> – Ihr Partner für saubere Lösungen.</p>
+            </div>
+            <div class="about-image">
+                👷‍♂️👷‍♂️<br>
+                <span style="font-size:1rem;">Team KSK</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt" class="section">
+    <div class="container">
+        <h2 class="section-title">Kontakt aufnehmen</h2>
+        <p class="section-subtitle">Bitte teilen Sie uns mit, wie wir Ihnen helfen können.</p>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Wir sind gerne für Sie da!</h3>
+                <p>Nach Erhalt Ihrer Nachricht kümmern wir uns so rasch wie möglich um Ihre Anfrage.</p>
+                <div class="detail"><span>📞</span> +49 123 456 789</div>
+                <div class="detail"><span>✉️</span> info@ksk-entsorgung.de</div>
+                <div class="detail"><span>📍</span> Musterstraße 1, 12345 Berlin</div>
+                <div style="margin-top:20px;">
+                    <p><strong>Öffnungszeiten:</strong><br>
+                    Mo – Fr: 08:00 – 18:00 Uhr<br>
+                    Sa: 09:00 – 14:00 Uhr</p>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-row">
+                        <input type="text" id="name" placeholder="Ihr Name *" required>
+                        <input type="email" id="email" placeholder="Ihre E-Mail *" required>
+                    </div>
+                    <input type="tel" id="phone" placeholder="Telefon (optional)">
+                    <select id="service" required>
+                        <option value="">Bitte wählen Sie einen Service</option>
+                        <option value="umzug">Umzugsentsorgung</option>
+                        <option value="renovation">Renovationsabfall</option>
+                        <option value="entruempelung">Entrümpelung</option>
+                        <option value="sonstiges">Sonstiges</option>
+                    </select>
+                    <textarea id="message" placeholder="Ihre Nachricht / Terminwunsch (Datum, Uhrzeit) *" required></textarea>
+                    <button type="submit" class="btn">Nachricht senden</button>
+                    <div id="formFeedback" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div>
+            <h4>KSK – Kalo Spiri Kompetenz</h4>
+            <p>Ihre Entsorgungsexperten für Umzug, Renovation und Entrümpelung.</p>
+        </div>
+        <div>
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="#start">Start</a></li>
+                <li><a href="#dienstleistungen">Dienstleistungen</a></li>
+                <li><a href="#referenzen">Referenzen</a></li>
+                <li><a href="#ueber-uns">Über uns</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Kontakt</h4>
+            <ul>
+                <li>📞 +49 123 456 789</li>
+                <li>✉️ info@ksk-entsorgung.de</li>
+                <li>📍 Musterstraße 1, 12345 Berlin</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Rechtliches</h4>
+            <ul>
+                <li><a href="#">Impressum</a></li>
+                <li><a href="#">Datenschutz</a></li>
+                <li><a href="#">AGB</a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            &copy; 2026 KSK – Kalo Spiri Kompetenz. Alle Rechte vorbehalten.
+        </div>
+    </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    (function() {
+        // ---------- Navigation (Section Wechsel) ----------
+        const navLinks = document.querySelectorAll('nav ul li a');
+        const sections = document.querySelectorAll('.section');
+        const navList = document.getElementById('navList');
+        const menuToggle = document.getElementById('menuToggle');
+
+        function switchSection(sectionId) {
+            // Alle Sections ausblenden
+            sections.forEach(sec => sec.classList.remove('active'));
+            // Zielsection einblenden
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.add('active');
+
+            // Aktiven Link markieren
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = Array.from(navLinks).find(link => link.dataset.section === sectionId);
+            if (activeLink) activeLink.classList.add('active');
+
+            // Mobile Menü schließen
+            navList.classList.remove('open');
+
+            // Bei Start wird die Hero-Farbe beibehalten, sonst Standard
+            // (optional)
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.dataset.section;
+                if (section) switchSection(section);
+            });
+        });
+
+        // Mobile Menu Toggle
+        menuToggle.addEventListener('click', function() {
+            navList.classList.toggle('open');
+        });
+
+        // ---------- CTA Button "Kostenlose Offerte" scrollt zum Kontakt ----------
+        document.getElementById('offerteBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            switchSection('kontakt');
+            // Sanft scrollen zum Kontaktabschnitt
+            document.getElementById('kontakt').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // ---------- Kontaktformular (Speichern in localStorage + Bestätigung) ----------
+        const form = document.getElementById('contactForm');
+        const feedback = document.getElementById('formFeedback');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Felder auslesen
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value.trim();
+
+            // Einfache Validierung
+            if (!name || !email || !service || !message) {
+                feedback.className = 'form-message error';
+                feedback.textContent = 'Bitte füllen Sie alle Pflichtfelder (*) aus.';
+                return;
+            }
+
+            // Daten zusammenstellen
+            const formData = {
+                name,
+                email,
+                phone,
+                service,
+                message,
+                timestamp: new Date().toISOString()
+            };
+
+            // Im localStorage speichern (Array von Anfragen)
+            let requests = JSON.parse(localStorage.getItem('ksk_anfragen')) || [];
+            requests.push(formData);
+            localStorage.setItem('ksk_anfragen', JSON.stringify(requests));
+
+            // Erfolgsmeldung
+            feedback.className = 'form-message success';
+            feedback.textContent = 'Vielen Dank! Ihre Anfrage wurde gespeichert. Wir melden uns schnellstmöglich.';
+            form.reset();
+
+            // (Hier könnte später ein echter AJAX-Request ans Backend gehen)
+        });
+
+        // ---------- Standard: "Start" bei Klick auf Logo (optional) ----------
+        document.querySelector('.logo').addEventListener('click', function() {
+            switchSection('start');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ---------- Initial: Falls Start nicht aktiv, setzen (sicherheitshalber) ----------
+        // Die Klasse 'active' ist bereits auf #start gesetzt.
+
+        // ---------- Hilfefunktion: Bei Klick auf Footer-Links auch wechseln ----------
+        document.querySelectorAll('footer a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                if (targetId) {
+                    switchSection(targetId);
+                    document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+    })();
+</script>
+
+</body>
+</html>
