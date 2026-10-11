@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSK - Kalo Spiri Kompetenz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
-    
+    <title>TRANSIT Transport GmbH</title>
+
     <style>
         :root {
-            --primary-color: #152A12;
-            --bg-color: #f9f9f9;
-            --text-color: #333;
+            /* Farben aus dem Logo */
+            --primary-color: #1a1e21;   /* Logo-Schwarz: Überschriften, Footer */
+            --accent-color: #0064bd;    /* Logo-Blau: Buttons, Links, Akzente */
+            --accent-dark: #004b93;     /* Dunkleres Logo-Blau: Hover */
+            --bg-color: #f4f7fb;
+            --text-color: #2b3036;
         }
         * {
             margin: 0;
@@ -30,30 +32,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: 14px 50px;
             background: #fff;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #e3e8ee;
         }
-        .logo-container { display: flex; flex-direction: column; align-items: flex-start; }
-        .logo-main { font-family: 'Black Ops One', cursive; font-size: 96px; color: var(--primary-color); line-height: 0.8; }
-        .logo-sub { font-size: 12px; color: var(--primary-color); letter-spacing: 1px; margin-top: 4px; }
+        .logo-container { display: block; line-height: 0; }
+        .logo-img { height: 80px; width: auto; display: block; }
         .nav-links { display: flex; align-items: center; gap: 30px; }
+        .nav-links a:hover { color: var(--accent-color); }
         .btn-offerte {
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
             color: #fff;
             padding: 10px 20px;
             border-radius: 5px;
             font-weight: bold;
-            transition: opacity 0.3s;
+            transition: background-color 0.3s;
             cursor: pointer;
             border: none;
         }
-        .btn-offerte:hover { opacity: 0.8; }
+        .btn-offerte:hover { background-color: var(--accent-dark); }
 
-        /* ---------- KORRIGIERTER SLIDER ---------- */
+        /* ---------- Vorher/Nachher-Slider ---------- */
         .slider-section { width: 100%; padding: 40px 50px; }
         .slider-container {
             position: relative;
@@ -81,7 +83,7 @@
             /* Beide Bilder haben gleiche Größe. Das obere wird per Clip-Path abgeschnitten. */
             z-index: 2;
             /* Standard: linke Hälfte sichtbar */
-            clip-path: inset(0 50% 0 0); 
+            clip-path: inset(0 50% 0 0);
         }
         .img-after {
             background-image: url('img/nachher.png'); /* Pfad anpassen */
@@ -118,18 +120,18 @@
         /* ---------- Allgemeine Sections ---------- */
         .section { padding: 60px 50px; max-width: 1200px; margin: 0 auto; }
         .section h2 { font-size: 36px; color: var(--primary-color); margin-bottom: 40px; text-align: center; }
-        .section-subtitle { text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 40px; }
+        .section-subtitle { text-align: center; font-size: 1.2rem; color: #5b6570; margin-bottom: 40px; }
         .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .intro-text { font-size: 20px; line-height: 1.6; }
         .image-placeholder-large {
             width: 100%;
             height: 350px;
-            background-color: #e0e0e0;
+            background-color: #e4ebf3;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #777;
+            color: #6b7785;
         }
         .dienstleistungen { background-color: var(--bg-color); }
         .dienst-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -137,22 +139,23 @@
             width: 100%;
             height: 250px;
             border-radius: 8px;
-            background-color: #ccc;
+            background-color: #d5dfeb;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
+            color: #5b6570;
         }
         .ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
         .ref-card {
-            background-color: #dcdcdc;
+            background-color: #e4ebf3;
             padding: 20px;
             height: 250px;
             border-radius: 10px;
             display: flex;
             align-items: flex-start;
             font-weight: 500;
-            color: #000;
+            color: var(--primary-color);
+            border-top: 4px solid var(--accent-color);
         }
 
         /* ---------- Kontakt (mit Mailversand) ---------- */
@@ -162,7 +165,7 @@
             gap: 30px;
             max-width: 900px;
             margin: 0 auto;
-            background: #f4f4f4;
+            background: #eef3f9;
             padding: 20px;
             border-radius: 10px;
         }
@@ -174,32 +177,37 @@
             width: 100%;
             padding: 12px 15px;
             margin-bottom: 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #d3dbe4;
             border-radius: 6px;
             font-size: 1rem;
         }
         .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: var(--accent-color);
         }
         .contact-form textarea { height: 120px; resize: vertical; }
         .contact-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .contact-form .btn-send {
             width: 100%;
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
             color: #fff;
             border: none;
             padding: 15px;
             border-radius: 5px;
             font-size: 1.1rem;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .contact-form .btn-send:hover { opacity: 0.9; }
+        .contact-form .btn-send:hover { background-color: var(--accent-dark); }
+        .form-message { display: none; margin-top: 15px; padding: 12px 15px; border-radius: 6px; font-size: 0.95rem; }
+        .form-message.success { display: block; background: #e7f6ec; color: #14532d; border: 1px solid #b7e4c7; }
+        .form-message.error { display: block; background: #fdecec; color: #7f1d1d; border: 1px solid #f5c2c2; }
 
         /* ---------- Footer ---------- */
         footer {
             background-color: var(--primary-color);
-            color: #ccc;
+            border-top: 4px solid var(--accent-color);
+            color: #ccd3da;
             padding: 60px 50px;
             margin-top: 60px;
         }
@@ -214,16 +222,21 @@
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 10px; }
         .footer-col ul li a:hover { color: #fff; text-decoration: underline; }
-        .footer-logo { font-family: 'Black Ops One', cursive; font-size: 96px; color: #fff; margin-bottom: 20px; display: block; line-height: 0.8; }
-        .copyright { text-align: center; padding-top: 20px; border-top: 1px solid #444; margin-top: 20px; font-size: 0.9rem; color: #888; grid-column: 1 / -1; }
+        .footer-brand { display: flex; flex-direction: column; align-items: flex-end; }
+        /* Weisse Karte, damit die dunklen Logo-Teile auf dem dunklen Footer sichtbar bleiben */
+        .footer-logo-card { background: #fff; padding: 14px 18px; border-radius: 10px; line-height: 0; }
+        .footer-logo-card img { width: 180px; max-width: 100%; height: auto; display: block; }
+        .copyright { text-align: center; padding-top: 20px; border-top: 1px solid #3a4046; margin-top: 20px; font-size: 0.9rem; color: #8d96a0; grid-column: 1 / -1; }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; align-items: flex-start; padding: 20px; gap: 20px; }
+            header { flex-direction: column; align-items: flex-start; padding: 16px 20px; gap: 16px; }
+            .logo-img { height: 64px; }
             .nav-links { flex-wrap: wrap; gap: 15px; }
             .slider-section { padding: 20px; }
             .slider-container { height: 300px; }
             .grid-2col { grid-template-columns: 1fr; text-align: center; }
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-brand { align-items: center; }
             .contact-wrapper { grid-template-columns: 1fr; padding: 0; }
         }
     </style>
@@ -231,10 +244,9 @@
 <body>
 
     <header>
-        <div class="logo-container">
-            <span class="logo-main">KSK</span>
-            <span class="logo-sub">Kalo Spiri Kompetenz</span>
-        </div>
+        <a href="#" class="logo-container" aria-label="TRANSIT Transport GmbH – nach oben">
+            <img src="img/logo.png" alt="TRANSIT Transport GmbH" class="logo-img" width="720" height="451">
+        </a>
         <nav class="nav-links">
             <a href="#dienstleistungen">Dienstleistungen</a>
             <a href="#referenzen">Referenzen</a>
@@ -244,7 +256,7 @@
         </nav>
     </header>
 
-    <!-- 1. KORRIGIERTER VORHER/NACHHER SLIDER (Nur Clip-Path) -->
+    <!-- 1. VORHER/NACHHER SLIDER (nur Clip-Path) -->
     <section class="slider-section">
         <div class="slider-container" id="sliderContainer">
             <!-- Unteres Bild (Nachher) -->
@@ -263,7 +275,7 @@
         <h2>Wer sind wir?</h2>
         <div class="grid-2col">
             <div>
-                <h3>Wir sind die Brüder Spiridonow...</h3>
+                <h3>Wir sind die TRANSIT Transport GmbH ...</h3>
                 <p class="intro-text">
                     Wir bieten eine professionelle Entsorgung Ihrer Wohnungen und Häuser. Schnell, sauber und zuverlässig.
                 </p>
@@ -301,7 +313,7 @@
     <section id="kontakt" class="section">
         <h2>Kontakt aufnehmen</h2>
         <p class="section-subtitle">Bitte teilen Sie uns mit, wie wir Ihnen helfen können. Nach Erhalt Ihrer Nachricht werden wir uns so rasch wie möglich um Ihre Anfrage kümmern.</p>
-        
+
         <div class="contact-wrapper">
             <div class="contact-info">
                 <h3>Wir sind gerne für Sie da!</h3>
@@ -335,6 +347,7 @@
                     </select>
                     <textarea id="message" placeholder="Nachricht / Terminwunsch *" required></textarea>
                     <button type="submit" class="btn-send">Senden</button>
+                    <div id="formFeedback" class="form-message" role="status" aria-live="polite"></div>
                 </form>
             </div>
         </div>
@@ -344,7 +357,7 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>KSK – Kalo Spiri Kompetenz</h4>
+                <h4>TRANSIT Transport GmbH</h4>
                 <p>Ihre Entsorgungsexperten für Umzug, Renovation und Entrümpelung.</p>
             </div>
             <div class="footer-col">
@@ -371,29 +384,30 @@
                     <li><a href="#">AGB</a></li>
                 </ul>
             </div>
-            <div class="footer-col" style="display: flex; flex-direction: column; align-items: flex-end;">
-                <span class="footer-logo">KSK</span>
-                <span style="font-size: 12px; letter-spacing: 1px; margin-bottom: 20px; display:block; text-align:right;">Kalo Spiri Kompetenz</span>
+            <div class="footer-col footer-brand">
+                <a href="#" class="footer-logo-card" aria-label="TRANSIT Transport GmbH – nach oben">
+                    <img src="img/logo.png" alt="TRANSIT Transport GmbH" width="720" height="451">
+                </a>
             </div>
             <div class="copyright">
-                &copy; 2026 KSK – Kalo Spiri Kompetenz. Alle Rechte vorbehalten.
+                &copy; 2026 TRANSIT Transport GmbH. Alle Rechte vorbehalten.
             </div>
         </div>
     </footer>
 
     <!-- JAVASCRIPT -->
     <script>
-        // 1. Slider Logik mit CLIP-PATH (kein Skalieren!)
+        // 1. Slider-Logik mit CLIP-PATH (kein Skalieren!)
         document.addEventListener('DOMContentLoaded', function() {
             const sliderContainer = document.getElementById('sliderContainer');
             const imgBefore = document.getElementById('imgBefore');
             const sliderHandle = document.getElementById('sliderHandle');
-            
+
             let isDragging = false;
 
             function updateSlider(clientX) {
                 if (!isDragging) return;
-                
+
                 const rect = sliderContainer.getBoundingClientRect();
                 let x = clientX - rect.left;
 
@@ -402,8 +416,7 @@
 
                 const percent = (x / rect.width) * 100;
 
-                // Setze den Clip-Path: Inset(top right bottom left)
-                // Wir schneiden rechts ab, also: inset(0 (100-percent)% 0 0)
+                // Clip-Path: inset(top right bottom left) -> rechts abschneiden
                 imgBefore.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
                 sliderHandle.style.left = percent + '%';
             }
@@ -425,7 +438,9 @@
             window.addEventListener('touchend', () => isDragging = false);
         });
 
-         // 2. Kontaktformular Logik (aus V1 übernommen)
+        // 2. Kontaktformular-Logik
+        const STORAGE_KEY = 'transit_anfragen';
+
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('contactForm');
             const feedback = document.getElementById('formFeedback');
@@ -450,9 +465,9 @@
                     timestamp: new Date().toISOString()
                 };
 
-                let requests = JSON.parse(localStorage.getItem('ksk_anfragen')) || [];
+                let requests = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
                 requests.push(formData);
-                localStorage.setItem('ksk_anfragen', JSON.stringify(requests));
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(requests));
 
                 feedback.className = 'form-message success';
                 feedback.textContent = 'Vielen Dank! Ihre Anfrage wurde gespeichert. Wir melden uns schnellstmöglich.';
